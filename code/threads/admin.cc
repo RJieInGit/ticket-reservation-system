@@ -11,8 +11,10 @@ bool sechdule :: checkAndBook(int start, int destiny,int time, int num){
     return true;
 } 
 admin:: admin(){
+    printf("2\n");
     nextTrain=0;
     loadSechdule();
+    printf("3\n");
 
 }
 
