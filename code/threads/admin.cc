@@ -1,4 +1,4 @@
-#include "admin.cc"
+#include "admin.h"
 #include <iostream>
 #include <fstream>
 #include <string>
