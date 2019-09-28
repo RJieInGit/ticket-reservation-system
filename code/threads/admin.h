@@ -3,7 +3,6 @@ this package manage the dynamic information that a reservation system and train 
 It is also responsible for the allocation of the thread and runs the simulation system
 */
 
-#include <stdlib.h>
 #include <list>
 #include "../lib/bitmap.h"
 #include <map>
