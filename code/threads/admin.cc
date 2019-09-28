@@ -30,7 +30,7 @@ void admin:: loadSechdule(){
   while(in) {
     in.getline(str, 255);  // delim defaults to '\n'
     int time = atoi(str);
-    if(time == 3)
+    if(time == 03)
     break;
     printf("get time %d",time); 
   }
