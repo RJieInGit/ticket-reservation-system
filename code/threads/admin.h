@@ -6,7 +6,7 @@ It is also responsible for the allocation of the thread and runs the simulation 
 #include <stdlib.h>
 #include <list>
 #include "../lib/bitmap.h"
-#include <unordered_map>
+#include <map>
 using namespace std;
 
 class sechdule {
@@ -15,7 +15,7 @@ class sechdule {
         bool checkAndBook(int start, int destiny,int time, int num);                 // return false if refuse           
 
     protected:
-        unordered_map<int,int>  route;      //pair<station, arrivetime> stations are 0-19
+        map<int,int>  route;      //pair<station, arrivetime> stations are 0-19
         list <Bitmap> business;            // represent the availablilty of each seat at each stop
         list <Bitmap> coash;            
 };
