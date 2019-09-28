@@ -1,4 +1,4 @@
-#include "admin.h"
+#include "admin.cc"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,6 +10,7 @@ sechdule :: sechdule(int depart){
 bool sechdule :: checkAndBook(int start, int destiny,int time, int num){
     return true;
 } 
+
 admin:: admin(){
     printf("2\n");
     nextTrain=0;
