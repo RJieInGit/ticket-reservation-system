@@ -19,7 +19,7 @@ admin:: admin(){
 }
 
 void admin:: loadSechdule(){
-    ifstream in("./file.txt");  
+    ifstream in("../file.txt");  
     if(!in) {
     cout << "Cannot open input file.\n";
     return ;
