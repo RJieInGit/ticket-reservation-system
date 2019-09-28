@@ -17,5 +17,5 @@ SimpleThread(int which)
 void
 ThreadTest()
 {
-   admin TrainSimulator;
+   admin TrainSimulator();
 }
