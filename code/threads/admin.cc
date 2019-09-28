@@ -25,10 +25,10 @@ void admin:: loadSechdule(){
     return ;
   }
 
-  char str[255];
+  char str[2555];
 
   while(in) {
-    in.getline(str, 255);  // delim defaults to '\n'
+    in.getline(str, 2555);  // delim defaults to '\n'
     int time = atoi(str);
     printf("get time %d",time); 
   }
