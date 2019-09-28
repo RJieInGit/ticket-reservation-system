@@ -1,6 +1,7 @@
 #include "kernel.h"
 #include "main.h"
 #include "thread.h"
+#include "admin.h"
 
 void
 SimpleThread(int which)
@@ -16,8 +17,5 @@ SimpleThread(int which)
 void
 ThreadTest()
 {
-    Thread *t = new Thread("forked thread");
-    t->Fork((VoidFunctionPtr) SimpleThread, (void *) 1);
-    
-    SimpleThread(0);
+   admin TrainSimulator;
 }
