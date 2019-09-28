@@ -11,7 +11,7 @@ sechdule :: sechdule(int depart){
 bool sechdule :: checkAndBook(int start, int destiny,int time, int num){
     return true;
 } 
-sechdule :: getDepartTime(){
+int sechdule :: getDepartTime(){
     return departTime;
 }
 
@@ -66,9 +66,9 @@ void admin:: startSimulate(){
     }
     printf("--------------------------------------------\n");
     printf("already passed 10pm, simulation ends\n");
-    printf("total granted request: %d",totalgranted\n);
-    printf("total discard request: %d", totaldiscard\n);
-    printf("total passagers: %d", passagers);
+    printf("total granted request: %d\n",totalgranted);
+    printf("total discard request: %d\n", totaldiscard);
+    printf("total passagers: %d\n", passagers);
 
 }
 
@@ -77,14 +77,14 @@ void admin:: createReservation(){
     discard=0;
     passagers=0;
   for (int i=0;i<5;i++){
-       Thread *t = new Thread(requestID);
-        t->Fork((VoidFunctionPtr) requestThread, (void *) requestID);
+       Thread *t = new Thread(std:: to_string(requestID));
+        t->Fork((VoidFunctionPtr) requestThread, (void *) &requestID);
         requestID++;
   }
-  printf("###################################################");
-  printf("at time %d hour, %d min",currentTime/60+6,currentTime%60);
-  printf(" granted : %d requests and %d passagers",totalgranted,passagers\n);
-  printf(" discard : %d requests", totaldiscard\n);
+  printf("###################################################\n");
+  printf("at time %d hour, %d min\n",currentTime/60+6,currentTime%60);
+  printf(" granted : %d requests and %d passagers\n ",totalgranted,passagers);
+  printf(" discard : %d requests\n ", totaldiscard);
 
 }
 
@@ -95,10 +95,12 @@ void admin:: requestThread(int requestID){
      int dTime = (rand()%72)*10;    //assume we find the most recent train for them
      int num = (rand()%8)+1;
      bool success=false;
-     for(int i=0;i<3;i++){
-         if(checkAndBook(start,destiny,dTime,num)){
+     //find the next train for the request. if next train is not available, then discard.
+     for(list<sechdule*> :: iterator it= sechdules.begin():it!=sechduels.end();++it){
+         int time= it->getDepartTime() + start*10;
+         if(time>dTime&&time-dTime<30){
+             if(it->checkAndBook(start,destiny,dTime,num))
              success=true;
-             break;
          }
      }
      if(!success){
@@ -137,8 +139,8 @@ void admin:: requestThread(int requestID){
       //thread ends
 }
 void admin :: createTrain(){
-     Thread *t = new Thread(trainID*1000);
-        t->Fork((VoidFunctionPtr) trainThread, (void *) trainID);
+     Thread *t = new Thread(std::to_string(trainID*1000));
+        t->Fork((VoidFunctionPtr) trainThread, (void *) &trainID);
         trainID++;
 }
 
