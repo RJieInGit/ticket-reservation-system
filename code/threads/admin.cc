@@ -2,17 +2,21 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-sechdule :: sechdule(int depart){
 
+Kernel *kernel;
+sechdule :: sechdule(int depart){
+    departTime=depart;
 }
 
 bool sechdule :: checkAndBook(int start, int destiny,int time, int num){
     return true;
 } 
+sechdule :: getDepartTime(){
+    return departTime;
+}
 
 admin:: admin(){
     printf("2\n");
-    nextTrain=0;
     loadSechdule();
     printf("3\n");
 
@@ -32,8 +36,150 @@ void admin:: loadSechdule(){
     int time = atoi(str);
     if(in.eof())
         break;
-    //printf("get time %d",time); 
+    sechdules.push_back(new sechdule(time));
   }
 
   in.close();
+}
+
+void admin:: startSimulate(){
+    currentTime=0;
+    //timestamp in min start from 6am
+    list<sechdule*> :: iterator nextTrain=sechdules.begin();
+    while(currentTime<=960)  {
+        if(currentTime%10==0){
+            //create 5 requests every 10min
+            createReservation();
+        }
+        //create train thread when according to the sechdules
+        if(nextTrain== sechdules.end()){
+            printf("no train left today,end of simulation \n");
+            break;
+        }
+        if((*nextTrain)->getDepartTime()==currentTime){
+          createTrain();
+          nextTrain++;
+        }
+        
+        currentTime++;
+        kernel->currentThread->Yield();
+    }
+    printf("--------------------------------------------\n");
+    printf("already passed 10pm, simulation ends\n");
+    printf("total granted request: %d",totalgranted\n);
+    printf("total discard request: %d", totaldiscard\n);
+    printf("total passagers: %d", passagers);
+
+}
+
+void admin:: createReservation(){
+    granted=0;
+    discard=0;
+    passagers=0;
+  for (int i=0;i<5;i++){
+       Thread *t = new Thread(requestID);
+        t->Fork((VoidFunctionPtr) requestThread, (void *) requestID);
+        requestID++;
+  }
+  printf("###################################################");
+  printf("at time %d hour, %d min",currentTime/60+6,currentTime%60);
+  printf(" granted : %d requests and %d passagers",totalgranted,passagers\n);
+  printf(" discard : %d requests", totaldiscard\n);
+
+}
+
+void admin:: requestThread(int requestID){
+     int start = rand()%19;         //can not start from last station
+     int destiny = rand()%(19-start);   
+     destiny+=start;
+     int dTime = (rand()%72)*10;    //assume we find the most recent train for them
+     int num = (rand()%8)+1;
+     bool success=false;
+     for(int i=0;i<3;i++){
+         if(checkAndBook(start,destiny,dTime,num)){
+             success=true;
+             break;
+         }
+     }
+     if(!success){
+         discard++; totaldiscard++;
+        return;
+     }
+     // log boarding
+     char[] keybording[50];
+     sprintf (keybording, "%d_%d",dTime,start);
+     f(!boardingMap.count(keyoff))
+        boardingMap.emplace(keyoff,new list<Thread*>())
+     boardingMap.at(keyoff).push_back(kernel->currentThread);
+
+     //log get off
+       char[] keyOff[50];
+     sprintf (keyoff, "%d_%d",dTime+(destiny-start)*10,destiny);
+     if(!getOffMap.count(keyoff))
+        getOffMap.emplace(keyoff,new list<Thread*>())
+     getOffMap.at(keyoff).push_back(kernel->currentThread);
+
+     requestPassager.emplace(requestID,num);
+     //log static data
+     granted++; totalgranted++; passager+=num; totalpassager+=num;
+     
+      kernel->interrupt->SetLevel(IntOff);
+      kernel->currentThread->Sleep(false);
+      //boarding
+      boardreq++;
+      boardingPassager+=num;
+
+      kernel->interrupt->SetLevel(IntOff);
+      kernel->currentThread->Sleep(false);
+      //getoff
+      getoffreq++;
+      getOffPassager+=num;
+      //thread ends
+}
+void admin :: createTrain(){
+     Thread *t = new Thread(trainID*1000);
+        t->Fork((VoidFunctionPtr) trainThread, (void *) trainID);
+        trainID++;
+}
+
+void admin::trainTread(int trainID){
+    int currentstation=-1;
+    // assuming 10min to arrive at next station.
+  while(currentstation<=20){
+        currentstation++;
+        boardingreq=0; boardingPassager=0; getoffreq=0; getOffPassager=0;
+        if(currentTime%10==0){
+        //boarding key and getoff key
+        char[] keybording[50];
+        sprintf (keybording, "%d_%d",dTime,start);
+         char[] keyOff[50];
+       sprintf (keyoff, "%d_%d",dTime+(destiny-start)*10,destiny);
+        if(boradingMap.count(boarding)){
+            //wake up the request thread to boarding
+            list *boarding = boardingMap.at(keyboarding);
+            for(list<Thread*> ::iterator it= boarding->begin(); it!=borading->end();++it){
+                kernel->SetLevel(IntOff);
+                kernel->scheduler->ReadyToRun(*it)
+                kernel->SetLevel(IntOn);
+            }
+            printf("$$$$$$$$$$$$$$$$ NOW BOARDING $$$$$$$$$$$$$$$$$$$$$$$\n");
+            printf("at time %d hour, %d min! the %dth station, trainID: %D\n",currentTime/60+6,currentTime%60,currentstation,trainID);
+            printf("%d itinerary and %d passagers are boarding\n",boardingreq,boardingPassager);
+        }
+        if(getOffMap.count()){
+            //wake up the request thread to getoff
+            list *getOff = getOffMap.at(keyboarding);
+            for(list<Thread*> ::iterator it= getOff->begin(); it!=getOff->end();++it){
+                kernel->SetLevel(IntOff);
+                kernel->scheduler->ReadyToRun(*it)
+                kernel->SetLevel(IntOn);
+            }
+            printf("==================== NOW GETOFF ===========================\n");
+            printf("at time %d hour, %d min! the %dth station\n",currentTime/60+6,currentTime%60,currentstation);
+            printf("%d itinerary and %d passagers are boarding\n",getOffreq,getOffPassager);
+        }
+    }
+    kernel->currentThread->Yield(); 
+  }      
+
 }
