@@ -203,7 +203,7 @@ DEFINES =  -DFILESYS_STUB -DRDATA -DSIM_FIX
 CFLAGS = -g -Wall $(INCPATH) $(DEFINES) $(HOSTCFLAGS) -DCHANGED -m32 -std=c++11
 LDFLAGS = -m32
 CPP_AS_FLAGS= -m32 -std=c++11
-
+CXXFLAGS += -std=c++11
 #####################################################################
 CPP=/lib/cpp
 CC = g++
