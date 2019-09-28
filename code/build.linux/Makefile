@@ -200,7 +200,7 @@ DEFINES =  -DFILESYS_STUB -DRDATA -DSIM_FIX
 # break the thread system.  You might want to use -fno-inline if
 # you need to call some inline functions from the debugger.
 
-CFLAGS = -g -Wall $(INCPATH) $(DEFINES) $(HOSTCFLAGS) -DCHANGED -m32
+CFLAGS = -g -Wall $(INCPATH) $(DEFINES) $(HOSTCFLAGS) -DCHANGED -m32 -std=c++11
 LDFLAGS = -m32
 CPP_AS_FLAGS= -m32
 
@@ -270,7 +270,8 @@ THREAD_H = ../threads/alarm.h\
 	../threads/switch.h\
 	../threads/synch.h\
 	../threads/synchlist.h\
-	../threads/thread.h
+	../threads/thread.h\
+	../threads/admin.h
 
 THREAD_C = ../threads/alarm.cc\
 	../threads/kernel.cc\
@@ -279,7 +280,8 @@ THREAD_C = ../threads/alarm.cc\
 	../threads/synch.cc\
 	../threads/synchlist.cc\
 	../threads/thread.cc\
-	../threads/threadtest.cc
+	../threads/threadtest.cc\
+	../threads/admin.cc
 
 THREAD_O = alarm.o kernel.o main.o scheduler.o synch.o thread.o threadtest.o
 
