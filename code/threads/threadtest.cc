@@ -18,5 +18,5 @@ void
 ThreadTest()
 {
     printf("i am here 1\n");
-   admin TrainSimulator();
+   admin TrainSimulator;
 }
