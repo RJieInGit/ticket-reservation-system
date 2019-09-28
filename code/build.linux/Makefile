@@ -337,7 +337,7 @@ $(PROGRAM): $(OFILES)
 	$(LD) $(OFILES) $(LDFLAGS) -o $(PROGRAM)
 
 $(C_OFILES): %.o:
-	$(CC) $(CFLAGS) -c -std=c++11$<
+	$(CC) $(CFLAGS) -c -std=gnu++11$<
 
 switch.o: ../threads/switch.S
 	$(CC) $(CPP_AS_FLAGS) -P $(INCPATH) $(HOSTCFLAGS) -c ../threads/switch.S
