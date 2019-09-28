@@ -32,7 +32,7 @@ void admin:: loadSechdule(){
     int time = atoi(str);
     if(in.eof())
         break;
-    printf("get time %d",time); 
+    //printf("get time %d",time); 
   }
 
   in.close();
