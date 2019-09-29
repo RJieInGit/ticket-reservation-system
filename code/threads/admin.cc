@@ -216,6 +216,7 @@ void admin::trainThread(){
                 kernel->interrupt->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
                 kernel->interrupt->SetLevel(IntOn);
+                 printf("good 5\n");
             }
             printf("\n\n\n==================== NOW GETOFF ===========================\n");
             printf("at time %d :, %d ! the %dth station\n",currentTime/60+6,currentTime%60,currentstation);
