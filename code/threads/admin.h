@@ -30,8 +30,8 @@ class admin {
         void startSimulate();
         void createReservation(); //create new request thread 
         void createTrain();       // create train thread
-        void requestThread(int *requestID);     // fork and called by the above
-        void trainThread(int *trainID);       // fork and called by the above
+        void requestThread();     // fork and called by the above
+        void trainThread();       // fork and called by the above
         int getRequestID();                  //return the next requestID
         int getTrainID();                    //return next trainID
 

@@ -79,7 +79,7 @@ void requestThreadHooker(admin *p){
 }
 
 void trainThreadHooker(admin *p){
-    p->trainThread();
+    p->trainThread(p->getTrainID());
 }
 
 void admin:: createReservation(){
@@ -101,7 +101,7 @@ void admin:: createReservation(){
 }
 
 
-void admin:: requestThread(int *requestID){
+void admin:: requestThread(){
      int start = rand()%19;         //can not start from last station
      int destiny = rand()%(19-start);   
      destiny+=start;
@@ -134,7 +134,7 @@ void admin:: requestThread(int *requestID){
         getOffMap->insert({keyOff,new list<Thread*>()});
      getOffMap->at(keyOff)->push_back(kernel->currentThread);
 
-     requestPassager->insert({*requestID,num});
+     requestPassager->insert({requestID,num});
      //log static data
      granted++; totalgranted++; passagers+=num; totalpassager+=num;
      
@@ -159,7 +159,7 @@ void admin :: createTrain(){
         trainID++;
 }
 
-void admin::trainThread(int *trainID){
+void admin::trainThread(){
     int currentstation=-1;
     // assuming 10min to arrive at next station.
   while(currentstation<=20){
@@ -180,7 +180,7 @@ void admin::trainThread(int *trainID){
                 kernel->interrupt->SetLevel(IntOn);
             }
             printf("$$$$$$$$$$$$$$$$ NOW BOARDING $$$$$$$$$$$$$$$$$$$$$$$\n");
-            printf("at time %d hour, %d min! the %dth station, trainID: %d\n",currentTime/60+6,currentTime%60,currentstation,*trainID);
+            printf("at time %d hour, %d min! the %dth station, trainID: %d\n",currentTime/60+6,currentTime%60,currentstation,trainID);
             printf("%d itinerary and %d passagers are boarding\n",boardingreq,boardingPassager);
         }
         if(getOffMap->count(keyOff)){
