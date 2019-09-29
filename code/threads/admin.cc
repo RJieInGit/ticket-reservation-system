@@ -40,6 +40,7 @@ bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBu
      //check avaiablity
      for(int i=start+1;i<destiny;i++){
          list<int>:: iterator it=avaiable.begin();
+         printf("good\n");
          while(it!=avaiable.end()){
              if(m->at(i)->Test(*it)){
                  avaiable.erase(it);
