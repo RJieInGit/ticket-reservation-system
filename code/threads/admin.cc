@@ -30,11 +30,13 @@ bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBu
          m=coash;
          n=40;
      }
+     printf("good1\n");
      for(int i=0;i<n;i++){
          if(!m->at(start)->Test(i)){
              avaiable.push_back(i);
          }
      }
+     printf("good2\n");
      //check avaiablity
      for(int i=start+1;i<destiny;i++){
          list<int>:: iterator it=avaiable.begin();
@@ -50,6 +52,7 @@ bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBu
          } 
      }
      int seat=avaiable.front();
+     printf("good3\n");
      for(int i=start;i<destiny;i++){
          //mark the seat to be occupied
          m->at(i)->Mark(seat);
