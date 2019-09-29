@@ -77,7 +77,7 @@ void admin:: createReservation(){
     discard=0;
     passagers=0;
   for (int i=0;i<5;i++){
-       Thread *t = new Thread(std:: to_string(requestID));
+       Thread *t = new Thread(std:: to_string(requestID).c_str());
         t->Fork((VoidFunctionPtr) requestThread, (void *) &requestID);
         requestID++;
   }
@@ -168,7 +168,7 @@ void admin::trainThread(int *trainID){
             printf("at time %d hour, %d min! the %dth station, trainID: %D\n",currentTime/60+6,currentTime%60,currentstation,trainID);
             printf("%d itinerary and %d passagers are boarding\n",boardingreq,boardingPassager);
         }
-        if(getOffMap.count()){
+        if(getOffMap->count()){
             //wake up the request thread to getoff
             list<Thread*> *getOff = getOffMap.at(keybording);
             for(list<Thread*> ::iterator it= getOff->begin(); it!=getOff->end();++it){
