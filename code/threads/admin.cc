@@ -1,4 +1,5 @@
 #include "admin.h"
+#include "kernel.h"
 #include <iostream>
 #include <fstream>
 #include <string>
