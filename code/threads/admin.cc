@@ -9,11 +9,11 @@ sechdule :: sechdule(int depart){
     departTime=depart;
     business =new map<int,Bitmap*>();
     for(int i=0;i<20;i++){
-        business->insert(i,new Bitmap(20));
+        business->insert({i,new Bitmap(20)});
     }
     coash =new map<int,Bitmap*>();
     for(int i=0;i<20;i++){
-        coash->insert(i,new Bitmap(40));
+        coash->insert({i,new Bitmap(40)});
     }
 }
 
