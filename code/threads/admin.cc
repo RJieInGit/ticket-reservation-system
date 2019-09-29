@@ -114,7 +114,7 @@ void admin:: requestThread(){
      int start = rand()%19;         //can not start from last station
      int destiny = rand()%(19-start);   
      destiny+=start;
-     int dTime = (rand()%72)*10;    //assume we find the most recent train for them
+     int dTime = currentTime+rand()%(720-currentTime);    //assume we find the most recent train for them
      int num = (rand()%8)+1;
      bool success=false;
      //find the next train for the request. if next train is not available, then discard.
