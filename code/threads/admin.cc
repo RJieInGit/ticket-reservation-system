@@ -212,11 +212,11 @@ void admin::trainThread(){
             for(list<Thread*> ::iterator it= getOff->begin(); it!=getOff->end();it++){
                 printf("good 3\n");
                 getOffPassager+= requestPassager->at(*it);
+                 printf("good 4\n");
                 kernel->interrupt->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
                 kernel->interrupt->SetLevel(IntOn);
             }
-            printf("good 4\n");
             printf("\n\n\n==================== NOW GETOFF ===========================\n");
             printf("at time %d :, %d ! the %dth station\n",currentTime/60+6,currentTime%60,currentstation);
             printf("%d itinerary and %d passagers are geting off\n\n\n",getOffreq,getOffPassager);
