@@ -164,6 +164,7 @@ void admin :: createTrain(){
      Thread *t = new Thread(name);
         t->Fork((VoidFunctionPtr) trainThreadHooker, (void *) this);
         trainID++;
+        kernel->currentThread->Yield();
 }
 
 void admin::trainThread(){
