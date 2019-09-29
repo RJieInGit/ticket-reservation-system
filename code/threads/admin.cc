@@ -7,17 +7,17 @@
 extern Kernel *kernel;
 sechdule :: sechdule(int depart){
     departTime=depart;
-    business =new list<Bitmap*>();
+    business =new map<int,Bitmap*>();
     for(int i=0;i<20;i++){
-        bussiness->push_back(new Bitmap(20));
-    }
-    coash =new list<Bitmap*>();
+        bussiness->insert(i,new Bitmap(20));
+    coash =new map<int,Bitmap*>();
     for(int i=0;i<40;i++){
-        coash->push_back(new Bitmap(40));
+        coash->insert(i,new Bitmap(40));
     }
 }
 
 bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBusiness){
+    //for(int i=start; )
     return true;
 } 
 int sechdule :: getDepartTime(){

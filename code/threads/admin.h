@@ -18,8 +18,8 @@ class sechdule {
         int getDepartTime();
     protected:
         map<int,int>  route;      //pair<station, arrivetime> stations are 0-19
-        list <Bitmap*>* business;            // represent the availablilty of each seat at each stop
-        list <Bitmap*>* coash;    
+        map <int,Bitmap*>* business;            // represent the availablilty of each seat at each stop
+        map <int,Bitmap*>* coash;    
         int departTime;        
 };
 
