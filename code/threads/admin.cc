@@ -170,7 +170,12 @@ void admin :: createTrain(){
 void admin::trainThread(){
     int currentstation=-1;
     // assuming 10min to arrive at next station.
+    int time =currentTime;
   while(currentstation<=20){
+        if(time==currentTime){
+            kernel->currentThread->Yield();
+        }
+        time = currentTime;
         if(currentTime%10==0){
         printf("now : %d  station: %d \n",currentTime,currentstation);
         currentstation++;
