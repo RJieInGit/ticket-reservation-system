@@ -168,9 +168,9 @@ void admin :: createTrain(){
 }
 
 void admin::trainThread(){
-    int currentstation=-1;
+    int currentstation=0;
     // assuming 10min to arrive at next station.
-    int time =currentTime;
+    int time =currentTime-1;
   while(currentstation<=20){
         if(time==currentTime){
             kernel->currentThread->Yield();
