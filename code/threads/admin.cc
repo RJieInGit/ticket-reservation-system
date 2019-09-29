@@ -203,11 +203,14 @@ void admin::trainThread(){
             printf("at time %d :, %d ! the %dth station, trainID: %d\n",currentTime/60+6,currentTime%60,currentstation,trainID);
             printf("%d itinerary and %d passagers are boarding\n\n\n",boardingreq,boardingPassager);
         }
+        printf("good 1 \n");
         if(getOffMap->count(keyOff)){
             //wake up the request thread to getoff
             list<Thread*> *getOff = getOffMap->at(keyOff);
             getOffreq=getOff->size();
+            printf("good 2 \n");
             for(list<Thread*> ::iterator it= getOff->begin(); it!=getOff->end();it++){
+                printf("good 3\n");
                 getOffPassager+= requestPassager->at(*it);
                 kernel->interrupt->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
