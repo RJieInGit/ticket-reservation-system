@@ -17,8 +17,8 @@
 #define FALSE  false
 // #define bool int		// necessary on the Mac?
 
-#define min(a,b)  (((a) < (b)) ? (a) : (b))
-#define max(a,b)  (((a) > (b)) ? (a) : (b))
+//#define min(a,b)  (((a) < (b)) ? (a) : (b))
+//#define max(a,b)  (((a) > (b)) ? (a) : (b))
 
 // Divide and either round up or down 
 #define divRoundDown(n,s)  ((n) / (s))
