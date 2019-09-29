@@ -113,7 +113,7 @@ void admin:: requestThread(){
      int start = rand()%19;         //can not start from last station
      int destiny = rand()%(19-start);   
      destiny+=start;
-     int dTime = currentTime+(rand()%(960-currentTime));    //dTIme of the request range form current to end
+     int dTime = (currentTime+(rand()%(960-currentTime)))/10*10;    //dTIme of the request range form current to end
      int num = (rand()%8)+1;
      bool success=false;
      //find the next train for the request. if next train is not available, then discard.
@@ -131,7 +131,7 @@ void admin:: requestThread(){
      // log boarding
      char keyBoarding[50];
      sprintf (keyBoarding, "%d_%d",dTime,start);
-     printf("key in map : %s\n",keyBoarding);
+     //printf("key in map : %s\n",keyBoarding);
      if(!boardingMap->count(keyBoarding))
         boardingMap->insert({keyBoarding,new list<Thread*>()});
      boardingMap->at(keyBoarding)->push_back(kernel->currentThread);
