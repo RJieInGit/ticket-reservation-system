@@ -177,7 +177,7 @@ void admin::trainThread(){
         }
         time = currentTime;
         if(currentTime%10==0){
-        printf("now : %d  station: %d \n",currentTime,currentstation);
+        printf("now : %d , time : %d  station: %d \n",currentTime,time,currentstation);
         currentstation++;
         boardingreq=0; boardingPassager=0; getOffreq=0; getOffPassager=0;
         //boarding key and getoff key
