@@ -4,11 +4,11 @@ It is also responsible for the allocation of the thread and runs the simulation 
 */
 
 #include <list>
-#include "../lib/bitmap.h"
 #include <map>
 using namespace std;
 #include "kernel.h"
 #include "thread.h"
+#include "../lib/bitmap.h"
 
 //typo of train schedule,LOL
 class sechdule {
