@@ -4,7 +4,6 @@
 #include <fstream>
 #include <string>
 
-Kernel *kernel;
 sechdule :: sechdule(int depart){
     departTime=depart;
 }
