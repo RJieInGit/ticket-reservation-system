@@ -80,7 +80,7 @@ void admin:: createReservation(){
     passagers=0;
   for (int i=0;i<5;i++){
        char name[200];
-       name=sprintf(name,"%d",requestID);
+       name=sprintf(name,"%d",requestID)+0;
        Thread *t = new Thread(name);
         t->Fork((VoidFunctionPtr) requestThread, (void *) &requestID);
         requestID++;
@@ -115,17 +115,17 @@ void admin:: requestThread(int *requestID){
      char keyBoarding[50];
      sprintf (keyBoarding, "%d_%d",dTime,start);
      if(!boardingMap->count(keyBoarding))
-        boardingMap->emplace(keyBoarding,new list<Thread*>());
+        boardingMap->insert({keyBoarding,new list<Thread*>()});
      boardingMap->at(keyBoarding)->push_back(kernel->currentThread);
 
      //log get off
        char keyOff[50];
      sprintf (keyOff, "%d_%d",dTime+(destiny-start)*10,destiny);
      if(!getOffMap->count(keyOff))
-        getOffMap->emplace(keyOff,new list<Thread*>());
+        getOffMap->insert({keyOff,new list<Thread*>()});
      getOffMap->at(keyOff)->push_back(kernel->currentThread);
 
-     requestPassager.emplace(requestID,num);
+     requestPassager.insert({requestID,num});
      //log static data
      granted++; totalgranted++; passagers+=num; totalpassager+=num;
      
