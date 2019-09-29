@@ -73,6 +73,7 @@ void admin:: startSimulate(){
         
         currentTime++;
         //yield to the train threads
+        printf("time ++ , now : %d \n",currentTime);
         kernel->currentThread->Yield();
     }
     printf("--------------------------------------------\n");
