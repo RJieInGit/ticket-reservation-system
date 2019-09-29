@@ -9,6 +9,7 @@ using namespace std;
 #include "thread.h"
 #include "../lib/bitmap.h"
 
+extern Kernel *kernel;
 //typo of train schedule,LOL
 class sechdule {
     public:
