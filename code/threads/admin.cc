@@ -83,7 +83,7 @@ void admin:: createReservation(){
        char name[200];
        sprintf(name,"%d",requestID+0);
        Thread *t = new Thread(name);
-        t->Fork((VoidFunctionPtr) requestThread, (void *) &requestID);
+        t->Fork((VoidFunctionPtr) requestThreadHooker, (void *) this);
         requestID++;
   }
   printf("###################################################\n");
@@ -91,6 +91,14 @@ void admin:: createReservation(){
   printf(" granted : %d requests and %d passagers\n ",totalgranted,passagers);
   printf(" discard : %d requests\n ", totaldiscard);
 
+}
+
+void requestThreadHooker(*admin p){
+    p->requestThread();
+}
+
+void trainThreadHooker(*admin p){
+    p->trainThread();
 }
 
 void admin:: requestThread(int *requestID){
@@ -147,7 +155,7 @@ void admin :: createTrain(){
     char name[200];
     sprintf(name,"%d",trainID+1000);
      Thread *t = new Thread(name);
-        t->Fork((VoidFunctionPtr) trainThread, (void *) &trainID);
+        t->Fork((VoidFunctionPtr) trainThreadHooker, (void *) this);
         trainID++;
 }
 
