@@ -102,7 +102,7 @@ void admin:: createReservation(){
         kernel->currentThread->Yield();
   }
   printf("###################################################\n");
-  printf("at time %d hour, %d min\n",currentTime/60+6,currentTime%60);
+  printf("at time %d : %d \n",currentTime/60+6,currentTime%60);
   printf(" granted : %d requests and %d passagers\n ",granted,passagers);
   printf(" discard : %d requests\n ", discard);
 
@@ -198,7 +198,7 @@ void admin::trainThread(){
                 kernel->interrupt->SetLevel(IntOn);
             }
             printf("\n\n\n$$$$$$$$$$$$$$$$ NOW BOARDING $$$$$$$$$$$$$$$$$$$$$$$\n");
-            printf("at time %d hour, %d min! the %dth station, trainID: %d\n",currentTime/60+6,currentTime%60,currentstation,trainID);
+            printf("at time %d :, %d ! the %dth station, trainID: %d\n",currentTime/60+6,currentTime%60,currentstation,trainID);
             printf("%d itinerary and %d passagers are boarding\n\n\n",boardingreq,boardingPassager);
         }
         if(getOffMap->count(keyOff)){
@@ -212,7 +212,7 @@ void admin::trainThread(){
                 kernel->interrupt->SetLevel(IntOn);
             }
             printf("\n\n\n==================== NOW GETOFF ===========================\n");
-            printf("at time %d hour, %d min! the %dth station\n",currentTime/60+6,currentTime%60,currentstation);
+            printf("at time %d :, %d ! the %dth station\n",currentTime/60+6,currentTime%60,currentstation);
             printf("%d itinerary and %d passagers are geting off\n\n\n",getOffreq,getOffPassager);
         }
     }
