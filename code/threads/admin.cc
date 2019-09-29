@@ -217,6 +217,7 @@ void admin::trainThread(){
             printf("at time %d :, %d ! the %dth station\n",currentTime/60+6,currentTime%60,currentstation);
             printf("%d itinerary and %d passagers are geting off\n\n\n",getOffreq,getOffPassager);
         }
+        printf("trainthread good at %d ",currentTime);
     }
    // printf("!!!!!!! %d, !!!!!!!!!!!%s\n",currentTime,kernel->currentThread->getName());
     kernel->currentThread->Yield(); 
