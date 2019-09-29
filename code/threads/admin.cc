@@ -113,6 +113,7 @@ void admin:: requestThread(){
      int start = rand()%19;         //can not start from last station
      int destiny = rand()%(19-start);   
      destiny+=start;
+     destiny+=1;
      int dTime = (currentTime+(rand()%(960-currentTime)))/10*10;    //dTIme of the request range form current to end
      int num = (rand()%8)+1;
      bool success=false;
@@ -203,20 +204,17 @@ void admin::trainThread(){
             printf("at time %d :, %d ! the %dth station, trainID: %d\n",currentTime/60+6,currentTime%60,currentstation,trainID);
             printf("%d itinerary and %d passagers are boarding\n\n\n",boardingreq,boardingPassager);
         }
-        printf("good 1 \n");
+      
         if(getOffMap->count(keyOff)){
             //wake up the request thread to getoff
             list<Thread*> *getOff = getOffMap->at(keyOff);
             getOffreq=getOff->size();
-            printf("good 2 \n");
+            
             for(list<Thread*> ::iterator it= getOff->begin(); it!=getOff->end();it++){
-                printf("good 3\n");
                 getOffPassager+= requestPassager->at(*it);
-                 printf("good 4\n");
                 kernel->interrupt->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
                 kernel->interrupt->SetLevel(IntOn);
-                 printf("good 5\n");
             }
             printf("\n\n\n==================== NOW GETOFF ===========================\n");
             printf("at time %d :, %d ! the %dth station\n",currentTime/60+6,currentTime%60,currentstation);
