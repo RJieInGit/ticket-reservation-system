@@ -209,7 +209,7 @@ void admin::trainThread(){
             printf("%d itinerary and %d passagers are geting off\n\n\n",getOffreq,getOffPassager);
         }
     }
-    printf("CSDKNFNKJFKNJFEKJNEFKJN   yIELD111\n");
+    printf("!!!!!!! %d, !!!!!!!!!!!%s",currentTime,kernel->currentThread->name);
     kernel->currentThread->Yield(); 
   }      
 
