@@ -23,6 +23,12 @@ admin:: admin(){
     boardingMap= new map<string,list<Thread*>* >();
     getOffMap =new map<string,list<Thread*>* >();
     requestPassager = new map<int,int>();
+    totaldiscard=0;
+    totalgranted=0;
+    totalpassager=0;
+    passagers=0;
+    granted=0;
+    discard=0;
 
 }
 
@@ -164,9 +170,9 @@ void admin::trainThread(){
     int currentstation=-1;
     // assuming 10min to arrive at next station.
   while(currentstation<=20){
+        if(currentTime%10==0){
         currentstation++;
         boardingreq=0; boardingPassager=0; getOffreq=0; getOffPassager=0;
-        if(currentTime%10==0){
         //boarding key and getoff key
         char keyBoarding[50];
         sprintf (keyBoarding, "%d_%d",currentTime,currentstation);
