@@ -99,11 +99,12 @@ void admin:: createReservation(){
        Thread *t = new Thread(name);
         t->Fork((VoidFunctionPtr) requestThreadHooker, (void *) this);
         requestID++;
+        kernel->currentThread->Yield();
   }
   printf("###################################################\n");
   printf("at time %d hour, %d min\n",currentTime/60+6,currentTime%60);
-  printf(" granted : %d requests and %d passagers\n ",totalgranted,passagers);
-  printf(" discard : %d requests\n ", totaldiscard);
+  printf(" granted : %d requests and %d passagers\n ",granted,passagers);
+  printf(" discard : %d requests\n ", discard);
 
 }
 
