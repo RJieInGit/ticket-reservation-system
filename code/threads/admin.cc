@@ -48,11 +48,11 @@ bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBu
              else{
                  it++;
              }
+             printf("good3\n");
              if(avaiable.size()==0)
               return false;
          } 
      }
-     printf("good3\n");
      int seat=avaiable.front();
      
      for(int i=start;i<destiny;i++){
