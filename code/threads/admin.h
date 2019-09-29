@@ -14,7 +14,7 @@ using namespace std;
 class sechdule {
     public:
         sechdule(int departTime);           // each stop takes 10min, so we only need depart time to construct 
-        bool checkAndBook(int start, int destiny,int time, int num);                 // return false if refuse           
+        bool checkAndBook(int start, int destiny,int time, int num,bool isBusiness);                 // return false if refuse           
         int getDepartTime();
     protected:
         map<int,int>  route;      //pair<station, arrivetime> stations are 0-19
