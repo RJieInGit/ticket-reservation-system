@@ -144,7 +144,7 @@ void admin :: createTrain(){
         trainID++;
 }
 
-void admin::trainTread(int &trainID){
+void admin::trainThread(int &trainID){
     int currentstation=-1;
     // assuming 10min to arrive at next station.
   while(currentstation<=20){
