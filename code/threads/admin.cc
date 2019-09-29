@@ -119,7 +119,7 @@ void admin:: requestThread(){
      //find the next train for the request. if next train is not available, then discard.
      for(list<sechdule*> :: iterator it= this->sechdules.begin();it!=this->sechdules.end();++it){
          int time= (*it)->getDepartTime() + start*10;
-         printf("dtime : %d   time: %d", dtime,time);
+         printf("dtime : %d   time: %d", dTime,time);
          if(time>=dTime&&time-dTime<=30){
              if((*it)->checkAndBook(start,destiny,dTime,num))
              success=true;
