@@ -4,7 +4,7 @@ It is also responsible for the allocation of the thread and runs the simulation 
 */
 
 #include <list>
-#include "../lib/bitmap.h"
+#include "../lib/bitmap.cc"
 #include <map>
 using namespace std;
 #include "kernel.h"
