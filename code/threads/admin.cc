@@ -57,7 +57,7 @@ void admin:: startSimulate(){
     //timestamp in min start from 6am
     list<sechdule*> :: iterator nextTrain=sechdules.begin();
     while(currentTime<960)  {
-        printf("currenttime :%d \n", currentTime);
+        //printf("currenttime :%d \n", currentTime);
         if(currentTime%10==0){
             //create 5 requests every 10min
             createReservation();
@@ -119,7 +119,7 @@ void admin:: requestThread(){
      //find the next train for the request. if next train is not available, then discard.
      for(list<sechdule*> :: iterator it= this->sechdules.begin();it!=this->sechdules.end();++it){
          int time= (*it)->getDepartTime() + start*10;
-         if(time>=dTime&&time-dTime<30){
+         if(time>=dTime&&time-dTime<=30){
              if((*it)->checkAndBook(start,destiny,dTime,num))
              success=true;
          }
