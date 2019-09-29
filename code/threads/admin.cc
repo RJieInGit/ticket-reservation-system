@@ -165,7 +165,7 @@ void admin:: requestThread(){
      //find the next train for the request. if next train is not available, then discard.
      for(list<sechdule*> :: iterator it= this->sechdules.begin();it!=this->sechdules.end();++it){
          int time= (*it)->getDepartTime() + start*10;
-         if(time>=dTime&&time-dTime<=80){
+         if(time>=dTime&&time-dTime<120){
              if((*it)->checkAndBook(start,destiny,dTime,num,isBusiness))
              success=true;
          }
