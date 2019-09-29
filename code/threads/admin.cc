@@ -62,7 +62,7 @@ void admin:: startSimulate(){
             createReservation();
         }
         //create train thread when according to the sechdules
-        if(nextTrain== sechdules.end()){
+        if(nextTrain == sechdules.end()){
             printf("no train left today,end of simulation \n");
             break;
         }
