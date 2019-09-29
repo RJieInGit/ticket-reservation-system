@@ -120,7 +120,7 @@ void admin:: requestThread(int *requestID){
 
      //log get off
        char keyOff[50];
-     sprintf (keyoff, "%d_%d",dTime+(destiny-start)*10,destiny);
+     sprintf (keyOff, "%d_%d",dTime+(destiny-start)*10,destiny);
      if(!getOffMap->count(keyoff))
         getOffMap->emplace(keyoff,new list<Thread*>())
      getOffMap->at(keyoff).push_back(kernel->currentThread);
@@ -161,17 +161,17 @@ void admin::trainThread(int *trainID){
         char keybording[50];
         sprintf (keybording, "%d_%d",currentTime,currentstation);
          char keyOff[50];
-        sprintf (keyoff, "%d_%d",currentTime,currentstation);
-        if(boardingMap->count(keyboarding)){
+        sprintf (keyOff, "%d_%d",currentTime,currentstation);
+        if(boardingMap->count(keybording)){
             //wake up the request thread to boarding
-            list *boarding = boardingMap->at(keyboarding);
+            list<Thread*> *boarding = boardingMap->at(keyboarding);
             for(list<Thread*> ::iterator it= boarding->begin(); it!=borading->end();++it){
                 kernel->interrupt->SetLevel(IntOff);
-                kernel->scheduler->ReadyToRun(*it)
+                kernel->scheduler->ReadyToRun(*it);
                 kernel->interrupt->SetLevel(IntOn);
             }
             printf("$$$$$$$$$$$$$$$$ NOW BOARDING $$$$$$$$$$$$$$$$$$$$$$$\n");
-            printf("at time %d hour, %d min! the %dth station, trainID: %D\n",currentTime/60+6,currentTime%60,currentstation,trainID);
+            printf("at time %d hour, %d min! the %dth station, trainID: %d\n",currentTime/60+6,currentTime%60,currentstation,trainID);
             printf("%d itinerary and %d passagers are boarding\n",boardingreq,boardingPassager);
         }
         if(getOffMap->count(keyOff)){
