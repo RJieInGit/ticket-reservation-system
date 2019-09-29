@@ -205,7 +205,7 @@ void admin::trainThread(){
         }
         if(getOffMap->count(keyOff)){
             //wake up the request thread to getoff
-            list<Thread*> *getOff = getOffMap->at(keyBoarding);
+            list<Thread*> *getOff = getOffMap->at(keyOff);
             getOffreq=getOff->size();
             for(list<Thread*> ::iterator it= getOff->begin(); it!=getOff->end();it++){
                 getOffPassager+= requestPassager->at(*it);
@@ -217,7 +217,7 @@ void admin::trainThread(){
             printf("at time %d :, %d ! the %dth station\n",currentTime/60+6,currentTime%60,currentstation);
             printf("%d itinerary and %d passagers are geting off\n\n\n",getOffreq,getOffPassager);
         }
-        printf("trainthread good at %d ",currentTime);
+        printf("trainthread good at %d \n",currentTime);
     }
    // printf("!!!!!!! %d, !!!!!!!!!!!%s\n",currentTime,kernel->currentThread->getName());
     kernel->currentThread->Yield(); 
