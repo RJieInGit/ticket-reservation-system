@@ -79,7 +79,7 @@ void requestThreadHooker(admin *p){
 }
 
 void trainThreadHooker(admin *p){
-    p->trainThread(p->getTrainID());
+    p->trainThread();
 }
 
 void admin:: createReservation(){
