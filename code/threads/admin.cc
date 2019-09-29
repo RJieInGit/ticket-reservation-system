@@ -171,7 +171,7 @@ void admin::trainThread(int *trainID){
                 kernel->interrupt->SetLevel(IntOn);
             }
             printf("$$$$$$$$$$$$$$$$ NOW BOARDING $$$$$$$$$$$$$$$$$$$$$$$\n");
-            printf("at time %d hour, %d min! the %dth station, trainID: %d\n",currentTime/60+6,currentTime%60,currentstation,trainID);
+            printf("at time %d hour, %d min! the %dth station, trainID: %d\n",currentTime/60+6,currentTime%60,currentstation,*trainID);
             printf("%d itinerary and %d passagers are boarding\n",boardingreq,boardingPassager);
         }
         if(getOffMap->count(keyOff)){
