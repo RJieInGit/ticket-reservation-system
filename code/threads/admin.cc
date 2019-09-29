@@ -52,8 +52,9 @@ bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBu
               return false;
          } 
      }
-     int seat=avaiable.front();
      printf("good3\n");
+     int seat=avaiable.front();
+     
      for(int i=start;i<destiny;i++){
          //mark the seat to be occupied
          m->at(i)->Mark(seat);
