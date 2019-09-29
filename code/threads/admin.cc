@@ -193,7 +193,7 @@ void admin::trainThread(){
             //wake up the request thread to boarding
             list<Thread*> *boarding = boardingMap->at(keyBoarding);
             boardingreq=boarding->size();
-            for(list<Thread*> ::iterator it= boarding->begin(); it!=boarding->end();++it){
+            for(list<Thread*> ::iterator it= boarding->begin(); it!=boarding->end();it++){
                 boardingPassager+= requestPassager->at(*it);
                 kernel->interrupt->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
@@ -207,7 +207,7 @@ void admin::trainThread(){
             //wake up the request thread to getoff
             list<Thread*> *getOff = getOffMap->at(keyBoarding);
             getOffreq=getOff->size();
-            for(list<Thread*> ::iterator it= getOff->begin(); it!=getOff->end();++it){
+            for(list<Thread*> ::iterator it= getOff->begin(); it!=getOff->end();it++){
                 getOffPassager+= requestPassager->at(*it);
                 kernel->interrupt->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
