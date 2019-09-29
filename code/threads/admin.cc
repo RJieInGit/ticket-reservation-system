@@ -81,7 +81,7 @@ void admin:: createReservation(){
     passagers=0;
   for (int i=0;i<5;i++){
        char name[200];
-       name=sprintf(name,"%d",requestID+0);
+       sprintf(name,"%d",requestID+0);
        Thread *t = new Thread(name);
         t->Fork((VoidFunctionPtr) requestThread, (void *) &requestID);
         requestID++;
