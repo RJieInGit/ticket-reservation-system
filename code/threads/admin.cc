@@ -122,8 +122,8 @@ void admin:: requestThread(int *requestID){
        char keyOff[50];
      sprintf (keyOff, "%d_%d",dTime+(destiny-start)*10,destiny);
      if(!getOffMap->count(keyOff))
-        getOffMap->emplace(keyOff,new list<Thread*>())
-     getOffMap->at(keyOff).push_back(kernel->currentThread);
+        getOffMap->emplace(keyOff,new list<Thread*>());
+     getOffMap->at(keyOff)->push_back(kernel->currentThread);
 
      requestPassager.emplace(requestID,num);
      //log static data
@@ -165,7 +165,7 @@ void admin::trainThread(int *trainID){
         if(boardingMap->count(keyBoarding)){
             //wake up the request thread to boarding
             list<Thread*> *boarding = boardingMap->at(keyBoarding);
-            for(list<Thread*> ::iterator it= boarding->begin(); it!=borading->end();++it){
+            for(list<Thread*> ::iterator it= boarding->begin(); it!=boarding->end();++it){
                 kernel->interrupt->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
                 kernel->interrupt->SetLevel(IntOn);
