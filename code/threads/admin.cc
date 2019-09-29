@@ -22,7 +22,7 @@ admin:: admin(){
     printf("3\n");
     boardingMap= new map<string,list<Thread*>* >();
     getOffMap =new map<string,list<Thread*>* >();
-    requestPassager = new map<int,int>();
+    requestPassager = new map<Thread*,int>();
     totaldiscard=0;
     totalgranted=0;
     totalpassager=0;
@@ -183,9 +183,9 @@ void admin::trainThread(){
         if(boardingMap->count(keyBoarding)){
             //wake up the request thread to boarding
             list<Thread*> *boarding = boardingMap->at(keyBoarding);
-            boardingreq=boarding.size();
+            boardingreq=boarding->size();
             for(list<Thread*> ::iterator it= boarding->begin(); it!=boarding->end();++it){
-                boardingPassager+= requestPassager.at(*it);
+                boardingPassager+= requestPassager->at(*it);
                 kernel->interrupt->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
                 kernel->interrupt->SetLevel(IntOn);
@@ -197,9 +197,9 @@ void admin::trainThread(){
         if(getOffMap->count(keyOff)){
             //wake up the request thread to getoff
             list<Thread*> *getOff = getOffMap->at(keyBoarding);
-            getOffreq=getOff.size();
+            getOffreq=getOff->size();
             for(list<Thread*> ::iterator it= getOff->begin(); it!=getOff->end();++it){
-                getOffPassager+= requestPassager.at(*it);
+                getOffPassager+= requestPassager->at(*it);
                 kernel->interrupt->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
                 kernel->interrupt->SetLevel(IntOn);
