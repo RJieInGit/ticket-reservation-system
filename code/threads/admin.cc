@@ -171,6 +171,7 @@ void admin::trainThread(){
     // assuming 10min to arrive at next station.
   while(currentstation<=20){
         if(currentTime%10==0){
+        printf("now : %d  station: %d ",currentTime,currentstation);
         currentstation++;
         boardingreq=0; boardingPassager=0; getOffreq=0; getOffPassager=0;
         //boarding key and getoff key
