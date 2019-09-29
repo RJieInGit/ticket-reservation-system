@@ -7,9 +7,17 @@
 extern Kernel *kernel;
 sechdule :: sechdule(int depart){
     departTime=depart;
+    business =new list<Bitmap*>();
+    for(int i=0;i<20;i++){
+        bussiness->push_back(new Bitmap(20));
+    }
+    coash =new list<Bitmap*>();
+    for(int i=0;i<40;i++){
+        coash->push_back(new Bitmap(40));
+    }
 }
 
-bool sechdule :: checkAndBook(int start, int destiny,int time, int num){
+bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBusiness){
     return true;
 } 
 int sechdule :: getDepartTime(){
@@ -114,6 +122,7 @@ void admin:: requestThread(){
      int destiny = rand()%(19-start);   
      destiny+=start;
      destiny+=1;
+     int isBusiness = rand()%2;
      int dTime = (currentTime+(rand()%(960-currentTime)))/10*10;    //dTIme of the request range form current to end
      int num = (rand()%8)+1;
      bool success=false;
@@ -121,7 +130,7 @@ void admin:: requestThread(){
      for(list<sechdule*> :: iterator it= this->sechdules.begin();it!=this->sechdules.end();++it){
          int time= (*it)->getDepartTime() + start*10;
          if(time>=dTime&&time-dTime<=80){
-             if((*it)->checkAndBook(start,destiny,dTime,num))
+             if((*it)->checkAndBook(start,destiny,dTime,num,isBusiness))
              success=true;
          }
      }
