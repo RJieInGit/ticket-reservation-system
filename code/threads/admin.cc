@@ -114,13 +114,13 @@ void admin:: requestThread(){
      int start = rand()%19;         //can not start from last station
      int destiny = rand()%(19-start);   
      destiny+=start;
-     int dTime = currentTime+rand()%(720-currentTime);    //assume we find the most recent train for them
+     int dTime = currentTime+(rand()%(720-currentTime));    //dTIme of the request range form current to end
      int num = (rand()%8)+1;
      bool success=false;
      //find the next train for the request. if next train is not available, then discard.
      for(list<sechdule*> :: iterator it= this->sechdules.begin();it!=this->sechdules.end();++it){
          int time= (*it)->getDepartTime() + start*10;
-         if(time>dTime&&time-dTime<30){
+         if(time>=dTime&&time-dTime<30){
              if((*it)->checkAndBook(start,destiny,dTime,num))
              success=true;
          }
