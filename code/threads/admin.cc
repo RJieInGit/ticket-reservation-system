@@ -56,7 +56,7 @@ void admin:: startSimulate(){
     currentTime=0;
     //timestamp in min start from 6am
     list<sechdule*> :: iterator nextTrain=sechdules.begin();
-    while(currentTime<=960)  {
+    while(currentTime<960)  {
         printf("currenttime :%d \n", currentTime);
         if(currentTime%10==0){
             //create 5 requests every 10min
@@ -113,7 +113,7 @@ void admin:: requestThread(){
      int start = rand()%19;         //can not start from last station
      int destiny = rand()%(19-start);   
      destiny+=start;
-     int dTime = currentTime+(rand()%(720-currentTime));    //dTIme of the request range form current to end
+     int dTime = currentTime+(rand()%(960-currentTime));    //dTIme of the request range form current to end
      int num = (rand()%8)+1;
      bool success=false;
      //find the next train for the request. if next train is not available, then discard.
