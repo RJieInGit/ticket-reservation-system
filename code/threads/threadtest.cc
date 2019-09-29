@@ -1,7 +1,7 @@
 #include "kernel.h"
 #include "main.h"
 #include "thread.h"
-#include "admin.cc"
+#include "admin.h"
 
 void
 SimpleThread(int which)
