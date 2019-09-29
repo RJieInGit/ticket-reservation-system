@@ -206,7 +206,7 @@ void admin::trainThread(){
             }
             printf("\n\n\n==================== NOW GETOFF ===========================\n");
             printf("at time %d hour, %d min! the %dth station\n",currentTime/60+6,currentTime%60,currentstation);
-            printf("%d itinerary and %d passagers are boarding\n\n\n",getOffreq,getOffPassager);
+            printf("%d itinerary and %d passagers are geting off\n\n\n",getOffreq,getOffPassager);
         }
     }
     kernel->currentThread->Yield(); 
