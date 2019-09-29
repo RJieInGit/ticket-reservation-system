@@ -131,6 +131,7 @@ void admin:: requestThread(){
      // log boarding
      char keyBoarding[50];
      sprintf (keyBoarding, "%d_%d",dTime,start);
+     printf("key in map : %s\n",keyBoarding);
      if(!boardingMap->count(keyBoarding))
         boardingMap->insert({keyBoarding,new list<Thread*>()});
      boardingMap->at(keyBoarding)->push_back(kernel->currentThread);
@@ -187,7 +188,7 @@ void admin::trainThread(){
         sprintf (keyBoarding, "%d_%d",currentTime,currentstation);
          char keyOff[50];
         sprintf (keyOff, "%d_%d",currentTime,currentstation);
-        printf("\n\n\n\n%d boarding, %d geoff\n\n\n\n\n",boardingMap->count(keyBoarding),getOffMap->count(keyOff));
+        //printf("\n\n\n\n%d boarding, %d geoff\n\n\n\n\n",boardingMap->count(keyBoarding),getOffMap->count(keyOff));
         if(boardingMap->count(keyBoarding)){
             //wake up the request thread to boarding
             list<Thread*> *boarding = boardingMap->at(keyBoarding);
