@@ -18,7 +18,41 @@ sechdule :: sechdule(int depart){
 }
 
 bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBusiness){
-    //for(int i=start; )
+    list<int> avaiable;
+     int n=0;
+     map<int,Bitmap*>* m;
+     if (isBusiness){
+         m=business;
+         n=20;
+     }
+     else{
+         m=coash;
+         n=40;
+     }
+     for(int i=0;i<n;i++){
+         if(!m->at(start)->Test(i)){
+             avaiable.push_back(i);
+         }
+     }
+     //check avaiablity
+     for(int i=start+1;i<destiny;i++){
+         list<int>:: iterator it=avaiable.begin()
+         while(it!=avaiable.end()){
+             if(m->at(i)->Test(*it)){
+                 avaiable.erase(it);
+             }
+             else{
+                 it++;
+             }
+             if(avaiable.size()==0)
+              return false;
+         } 
+     }
+     int seat=avaiable->pop_back();
+     for(int i=start;i<destiny;i++){
+         //mark the seat to be occupied
+         m->at(i).Mark(seat);
+     }
     return true;
 } 
 int sechdule :: getDepartTime(){
