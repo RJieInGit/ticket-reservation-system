@@ -43,12 +43,12 @@ bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBu
          printf("good\n");
          while(it!=avaiable.end()){
              if(m->at(i)->Test(*it)){
-                 avaiable.erase(it);
+                 it=avaiable.erase(it);
              }
              else{
                  it++;
              }
-             printf("good3\n");
+             printf("good3 \n");
              if(avaiable.size()==0)
               return false;
          } 
