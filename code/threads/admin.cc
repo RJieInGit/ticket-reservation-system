@@ -18,7 +18,6 @@ sechdule :: sechdule(int depart){
 }
 
 bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBusiness){
-    printf("%d   | %d ||  %d\n",start,destiny,time);
     list<int> avaiable;
      int n=0;
      map<int,Bitmap*>* m;
@@ -30,17 +29,14 @@ bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBu
          m=coash;
          n=40;
      }
-     printf("good1\n");
      for(int i=0;i<n;i++){
          if(!m->at(start)->Test(i)){
              avaiable.push_back(i);
          }
      }
-     printf("good2\n");
      //check avaiablity
      for(int i=start+1;i<destiny;i++){
          list<int>:: iterator it=avaiable.begin();
-         printf("good\n");
          while(it!=avaiable.end()){
              if(m->at(i)->Test(*it)){
                  it=avaiable.erase(it);
@@ -48,7 +44,6 @@ bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBu
              else{
                  it++;
              }
-             printf("good3 \n");
              if(avaiable.size()==0)
               return false;
          } 
