@@ -21,6 +21,7 @@ admin:: admin(){
     printf("3\n");
     boardingMap= new map<string,list<Thread*>* >();
     getOffMap =new map<string,list<Thread*>* >();
+    requestPassager = new map<int,int>();
 
 }
 
@@ -80,7 +81,7 @@ void admin:: createReservation(){
     passagers=0;
   for (int i=0;i<5;i++){
        char name[200];
-       name=sprintf(name,"%d",requestID)+0;
+       name=sprintf(name,"%d",requestID+0);
        Thread *t = new Thread(name);
         t->Fork((VoidFunctionPtr) requestThread, (void *) &requestID);
         requestID++;
@@ -125,7 +126,7 @@ void admin:: requestThread(int *requestID){
         getOffMap->insert({keyOff,new list<Thread*>()});
      getOffMap->at(keyOff)->push_back(kernel->currentThread);
 
-     requestPassager.insert({requestID,num});
+     requestPassager->insert({*requestID,num});
      //log static data
      granted++; totalgranted++; passagers+=num; totalpassager+=num;
      

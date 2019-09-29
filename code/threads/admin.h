@@ -43,7 +43,7 @@ class admin {
         int trainID;              // trainIDs are ints start from 0. they are unique
         map<string,list<Thread*>* >  *boardingMap; //k: time_station v:requestID
         map<string,list<Thread*>* >  *getOffMap;   //k: time_station v: requestID
-        map<int,int> requestPassager;        // k: requestID, v: num of passagers in this request
+        map<int,int> *requestPassager;        // k: requestID, v: num of passagers in this request
 
         //below are the static variables
         int discard;                         // num of the discarded request
