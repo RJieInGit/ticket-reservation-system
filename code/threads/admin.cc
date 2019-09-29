@@ -18,6 +18,7 @@ sechdule :: sechdule(int depart){
 }
 
 bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBusiness){
+    printf("%d   | %d ||  %d\n",start,destiny,time);
     list<int> avaiable;
      int n=0;
      map<int,Bitmap*>* m;
