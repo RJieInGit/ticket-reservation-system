@@ -19,6 +19,8 @@ admin:: admin(){
     printf("2\n");
     loadSechdule();
     printf("3\n");
+    boardingMap= new map<string,list<Thread*> >();
+    getOffMap =new map<string,list<Thread*> >();
 
 }
 
@@ -77,7 +79,9 @@ void admin:: createReservation(){
     discard=0;
     passagers=0;
   for (int i=0;i<5;i++){
-       Thread *t = new Thread(std:: to_string(requestID).c_str());
+       char name[200];
+       name=sprintf(name,"%d",requestID);
+       Thread *t = new Thread(name);
         t->Fork((VoidFunctionPtr) requestThread, (void *) &requestID);
         requestID++;
   }
@@ -96,10 +100,10 @@ void admin:: requestThread(int *requestID){
      int num = (rand()%8)+1;
      bool success=false;
      //find the next train for the request. if next train is not available, then discard.
-     for(list<sechdule*> :: iterator it= sechdules.begin();it!=sechduels.end();++it){
-         int time= it->getDepartTime() + start*10;
+     for(list<sechdule*> :: iterator it= this->sechdules.begin();it!=this->sechduels.end();++it){
+         int time= (*it)->getDepartTime() + start*10;
          if(time>dTime&&time-dTime<30){
-             if(it->checkAndBook(start,destiny,dTime,num))
+             if((*it)->checkAndBook(start,destiny,dTime,num))
              success=true;
          }
      }
@@ -108,38 +112,40 @@ void admin:: requestThread(int *requestID){
         return;
      }
      // log boarding
-     char[] keybording[50];
+     char keybording[50];
      sprintf (keybording, "%d_%d",dTime,start);
-     f(!boardingMap.count(keyoff))
-        boardingMap.emplace(keyoff,new list<Thread*>())
-     boardingMap.at(keyoff).push_back(kernel->currentThread);
+     if(!boardingMap->count(keybording))
+        boardingMap->emplace(keybording,new list<Thread*>())
+     boardingMap->at(keybording).push_back(kernel->currentThread);
 
      //log get off
        char[] keyOff[50];
      sprintf (keyoff, "%d_%d",dTime+(destiny-start)*10,destiny);
-     if(!getOffMap.count(keyoff))
-        getOffMap.emplace(keyoff,new list<Thread*>())
-     getOffMap.at(keyoff).push_back(kernel->currentThread);
+     if(!getOffMap->count(keyoff))
+        getOffMap->emplace(keyoff,new list<Thread*>())
+     getOffMap->at(keyoff).push_back(kernel->currentThread);
 
      requestPassager.emplace(requestID,num);
      //log static data
-     granted++; totalgranted++; passager+=num; totalpassager+=num;
+     granted++; totalgranted++; passagers+=num; totalpassager+=num;
      
       kernel->interrupt->SetLevel(IntOff);
       kernel->currentThread->Sleep(false);
       //boarding
-      boardreq++;
+      boardingreq++;
       boardingPassager+=num;
 
       kernel->interrupt->SetLevel(IntOff);
       kernel->currentThread->Sleep(false);
       //getoff
-      getoffreq++;
+      getOffreq++;
       getOffPassager+=num;
       //thread ends
 }
 void admin :: createTrain(){
-     Thread *t = new Thread(std::to_string(trainID*1000));
+    char name[200];
+    sprintf(name,"%d",trainID+1000);
+     Thread *t = new Thread(name);
         t->Fork((VoidFunctionPtr) trainThread, (void *) &trainID);
         trainID++;
 }
@@ -156,12 +162,12 @@ void admin::trainThread(int *trainID){
         sprintf (keybording, "%d_%d",currentTime,currentstation);
          char[] keyOff[50];
         sprintf (keyoff, "%d_%d",currentTime,currentstation);
-        if(boradingMap.count(boarding)){
+        if(boardingMap->count(boarding)){
             //wake up the request thread to boarding
-            list *boarding = boardingMap.at(keyboarding);
+            list *boarding = boardingMap->at(keyboarding);
             for(list<Thread*> ::iterator it= boarding->begin(); it!=borading->end();++it){
                 kernel->SetLevel(IntOff);
-                kernel->scheduler->ReadyToRun(*it)
+                kernel->scheduler->ReadyToRun(it)
                 kernel->SetLevel(IntOn);
             }
             printf("$$$$$$$$$$$$$$$$ NOW BOARDING $$$$$$$$$$$$$$$$$$$$$$$\n");
@@ -170,7 +176,7 @@ void admin::trainThread(int *trainID){
         }
         if(getOffMap->count()){
             //wake up the request thread to getoff
-            list<Thread*> *getOff = getOffMap.at(keybording);
+            list<Thread*> *getOff = getOffMap->at(keybording);
             for(list<Thread*> ::iterator it= getOff->begin(); it!=getOff->end();++it){
                 kernel->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
