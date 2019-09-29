@@ -74,6 +74,13 @@ void admin:: startSimulate(){
     printf("total passagers: %d\n", passagers);
 
 }
+void requestThreadHooker(admin *p){
+    p->requestThread();
+}
+
+void trainThreadHooker(admin *p){
+    p->trainThread();
+}
 
 void admin:: createReservation(){
     granted=0;
@@ -93,13 +100,6 @@ void admin:: createReservation(){
 
 }
 
-void requestThreadHooker(*admin p){
-    p->requestThread();
-}
-
-void trainThreadHooker(*admin p){
-    p->trainThread();
-}
 
 void admin:: requestThread(int *requestID){
      int start = rand()%19;         //can not start from last station
