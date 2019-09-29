@@ -57,6 +57,7 @@ void admin:: startSimulate(){
     //timestamp in min start from 6am
     list<sechdule*> :: iterator nextTrain=sechdules.begin();
     while(currentTime<=960)  {
+        printf("currenttime :%d \n", currentTime);
         if(currentTime%10==0){
             //create 5 requests every 10min
             createReservation();
