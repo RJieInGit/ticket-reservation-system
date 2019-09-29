@@ -72,13 +72,14 @@ void admin:: startSimulate(){
         }
         
         currentTime++;
+        //yield to the train threads
         kernel->currentThread->Yield();
     }
     printf("--------------------------------------------\n");
     printf("already passed 10pm, simulation ends\n");
     printf("total granted request: %d\n",totalgranted);
     printf("total discard request: %d\n", totaldiscard);
-    printf("total passagers: %d\n", passagers);
+    printf("total passagers: %d\n", totalpassager);
 
 }
 void requestThreadHooker(admin *p){
@@ -142,7 +143,7 @@ void admin:: requestThread(){
         getOffMap->insert({keyOff,new list<Thread*>()});
      getOffMap->at(keyOff)->push_back(kernel->currentThread);
 
-     requestPassager->insert({requestID,num});
+     requestPassager->insert({kernel->currentThread,num});
      //log static data
      granted++; totalgranted++; passagers+=num; totalpassager+=num;
      
@@ -182,26 +183,30 @@ void admin::trainThread(){
         if(boardingMap->count(keyBoarding)){
             //wake up the request thread to boarding
             list<Thread*> *boarding = boardingMap->at(keyBoarding);
+            boardingreq=boarding.size();
             for(list<Thread*> ::iterator it= boarding->begin(); it!=boarding->end();++it){
+                boardingPassager+= requestPassager.at(*it);
                 kernel->interrupt->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
                 kernel->interrupt->SetLevel(IntOn);
             }
-            printf("$$$$$$$$$$$$$$$$ NOW BOARDING $$$$$$$$$$$$$$$$$$$$$$$\n");
+            printf("\n\n\n$$$$$$$$$$$$$$$$ NOW BOARDING $$$$$$$$$$$$$$$$$$$$$$$\n");
             printf("at time %d hour, %d min! the %dth station, trainID: %d\n",currentTime/60+6,currentTime%60,currentstation,trainID);
-            printf("%d itinerary and %d passagers are boarding\n",boardingreq,boardingPassager);
+            printf("%d itinerary and %d passagers are boarding\n\n\n",boardingreq,boardingPassager);
         }
         if(getOffMap->count(keyOff)){
             //wake up the request thread to getoff
             list<Thread*> *getOff = getOffMap->at(keyBoarding);
+            getOffreq=getOff.size();
             for(list<Thread*> ::iterator it= getOff->begin(); it!=getOff->end();++it){
+                getOffPassager+= requestPassager.at(*it);
                 kernel->interrupt->SetLevel(IntOff);
                 kernel->scheduler->ReadyToRun(*it);
                 kernel->interrupt->SetLevel(IntOn);
             }
-            printf("==================== NOW GETOFF ===========================\n");
+            printf("\n\n\n==================== NOW GETOFF ===========================\n");
             printf("at time %d hour, %d min! the %dth station\n",currentTime/60+6,currentTime%60,currentstation);
-            printf("%d itinerary and %d passagers are boarding\n",getOffreq,getOffPassager);
+            printf("%d itinerary and %d passagers are boarding\n\n\n",getOffreq,getOffPassager);
         }
     }
     kernel->currentThread->Yield(); 
