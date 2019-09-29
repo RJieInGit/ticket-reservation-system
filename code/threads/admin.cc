@@ -48,10 +48,10 @@ bool sechdule :: checkAndBook(int start, int destiny,int time, int num,bool isBu
               return false;
          } 
      }
-     int seat=avaiable->pop_back();
+     int seat=avaiable.pop_back();
      for(int i=start;i<destiny;i++){
          //mark the seat to be occupied
-         m->at(i).Mark(seat);
+         m->at(i)->Mark(seat);
      }
     return true;
 } 
