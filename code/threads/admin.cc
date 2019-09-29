@@ -88,7 +88,7 @@ void admin:: createReservation(){
 
 }
 
-void admin:: requestThread(int requestID){
+void admin:: requestThread(int *requestID){
      int start = rand()%19;         //can not start from last station
      int destiny = rand()%(19-start);   
      destiny+=start;
@@ -144,7 +144,7 @@ void admin :: createTrain(){
         trainID++;
 }
 
-void admin::trainThread(int &trainID){
+void admin::trainThread(int *trainID){
     int currentstation=-1;
     // assuming 10min to arrive at next station.
   while(currentstation<=20){
