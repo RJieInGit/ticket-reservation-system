@@ -247,7 +247,8 @@ void admin::trainThread(){
             }
             printf("\n\n\n$$$$$$$$$$$$$$$$ NOW BOARDING $$$$$$$$$$$$$$$$$$$$$$$\n");
             printf("at time %d :, %d ! the %dth station, trainID: %d\n",currentTime/60+6,currentTime%60,currentstation,trainID);
-            printf("%d itinerary and %d passagers are boarding\n\n\n",boardingreq,boardingPassager);
+            printf("%d itinerary and %d passagers are boarding\n",boardingreq,boardingPassager);
+            printf("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n\n\n");
         }
       
         if(getOffMap->count(keyOff)){
@@ -263,9 +264,9 @@ void admin::trainThread(){
             }
             printf("\n\n\n==================== NOW GETOFF ===========================\n");
             printf("at time %d :, %d ! the %dth station\n",currentTime/60+6,currentTime%60,currentstation);
-            printf("%d itinerary and %d passagers are geting off\n\n\n",getOffreq,getOffPassager);
+            printf("%d itinerary and %d passagers are geting off\n",getOffreq,getOffPassager);
+            printf("====================================================================\n\n\n");
         }
-        printf("trainthread good at %d \n",currentTime);
     }
    // printf("!!!!!!! %d, !!!!!!!!!!!%s\n",currentTime,kernel->currentThread->getName());
     kernel->currentThread->Yield(); 
