@@ -116,7 +116,6 @@ void admin:: startSimulate(){
         currentTime++;
         //yield to the train threads
         //printf("time ++ , now : %d \n",currentTime);
-        printf("the totaltick : %d \n", kernel->stats->totalTicks);
         kernel->currentThread->Yield();
     }
     printf("--------------------------------------------\n");
@@ -150,6 +149,7 @@ void admin:: createReservation(){
   printf("at time %d : %d \n",currentTime/60+6,currentTime%60);
   printf(" granted : %d requests and %d passagers\n ",granted,passagers);
   printf(" discard : %d requests\n ", discard);
+  printf("the totaltick : %d \n", kernel->stats->totalTicks);
 
 }
 
