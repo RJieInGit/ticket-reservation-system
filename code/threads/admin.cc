@@ -116,6 +116,7 @@ void admin:: startSimulate(){
         currentTime++;
         //yield to the train threads
         //printf("time ++ , now : %d \n",currentTime);
+        printf("the totaltick : %d \n", kernel->stats->totalTicks);
         kernel->currentThread->Yield();
     }
     printf("--------------------------------------------\n");
